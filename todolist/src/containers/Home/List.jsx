@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.css'
 import axios from 'axios'
 import {BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs'
 
-function List({todos, fetchTodos}) {
-   
+function List() {
+    
+    const[todos,setTodos] = useState([])
+
+    const fetchTodos = () => {
+        axios.get('http://localhost:3001/get')
+          .then(result => setTodos(result.data))
+          .catch(err => console.log(err));
+      };
+    
+      useEffect(() => {
+        fetchTodos();
+      }, []);
+
     const handleEdit = (id) => {
         axios.put('http://localhost:3001/update/'+id)
         .then(result => {
