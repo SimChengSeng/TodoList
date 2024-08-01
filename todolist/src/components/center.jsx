@@ -4,7 +4,7 @@ function center(props) {
   return (
     <div style={{
       display: 'grid',
-      height: '50vh',
+      height: '40vh',
       alignContent: 'center'
         }}>
             {props.children}

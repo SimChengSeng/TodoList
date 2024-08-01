@@ -4,8 +4,9 @@ import axios from 'axios'
 
 function Create({fetchTodos}) {
   const[task,setTask] = useState('');
+  
   const handleAdd = () =>{
-
+    
     if(!task.trim()){
       console.log('Task is empty')
       return
