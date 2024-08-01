@@ -6,7 +6,8 @@ const useTodos = () => {
 
   const fetchTodos = () => {
     axios.get('http://localhost:3001/get')
-      .then(result => setTodos(result.data))
+      .then(result => {
+        setTodos(result.data)})
       .catch(err => console.log(err));
   };
 

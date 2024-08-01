@@ -35,6 +35,9 @@ function List() {
         .catch(err => console.log(err))
     }
 
+    const todosNotDone = todos.filter(todo => !todo.done);
+    const todosDone = todos.filter(todo => todo.done);
+
   return (  
     <div className='list'>
        {
@@ -42,21 +45,32 @@ function List() {
           ?
           <div><h2>No Record!</h2></div>
           :
-          todos.map(todo => (
-            <div className='task'>
-                <div className='checkbox' onClick={() => handleEdit(todo._id)}>
-                    {todo.done ? 
-                    <BsFillCheckCircleFill className='icon'></BsFillCheckCircleFill>
-                    :<BsCircleFill className='icon'/>
-                    }
-                    <p className={todo.done ? "line_through" : ""}>{todo.task}</p>
-                </div>
-                <div>
-                    <span><BsFillTrashFill className='icon' 
-                        onClick={() => handleDelete(todo._id)}/></span>
-                </div>
-            </div>
-          ))
+          (
+            <>
+                {todosNotDone.map(todo => (
+                    <div key={todo._id} className='task'>
+                        <div className='checkbox' onClick={() => handleEdit(todo._id)}>
+                            <BsCircleFill className='icon' />
+                            <p>{todo.task}</p>
+                        </div>
+                        <div>
+                            <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
+                        </div>
+                    </div>
+                ))}
+                {todosDone.map(todo => (
+                    <div key={todo._id} className='task'>
+                        <div className='checkbox' onClick={() => handleEdit(todo._id)}>
+                            <BsFillCheckCircleFill className='icon' />
+                            <p className="line_through">{todo.task}</p>
+                        </div>
+                        <div>
+                            <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
+                        </div>
+                    </div>
+                ))}
+            </>
+        )
         }
     </div>
   )
