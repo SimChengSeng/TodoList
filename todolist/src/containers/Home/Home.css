@@ -31,6 +31,7 @@
     padding: 2px 5px 2px 5px;
     margin-top: 5px;
     font-size: 1.25rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
   .checkbox{
@@ -44,10 +45,10 @@
     cursor: pointer;
   }
 
-  .list :hover{
+  /* .list :hover{
    
-    background: lightblue;
-  }
+    
+  } */
 
   .task div span .icon{
     margin: 0px 5px; 

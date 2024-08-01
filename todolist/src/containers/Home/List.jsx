@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Home.css'
 import axios from 'axios'
 import {BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs'
+import { BiBorderAll } from 'react-icons/bi'
 
 function List() {
     
@@ -43,7 +44,7 @@ function List() {
        {
           todos.length === 0
           ?
-          <div><h2>No Record!</h2></div>
+          <div><h2 style={{border: "1px solid black", padding:"10px", margin:"auto"}}>No Record!</h2></div>
           :
           (
             <>

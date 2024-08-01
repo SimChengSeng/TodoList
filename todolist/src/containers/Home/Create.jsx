@@ -17,7 +17,7 @@ function Create({fetchTodos}) {
        
       console.log('Task after setting to empty:', task);
       setTask('');
-      fetchTodos();
+     //fetchTodos();
       location.reload()
     })
     
@@ -26,7 +26,7 @@ function Create({fetchTodos}) {
 
   return (  
     <div className='create-form'>
-        <input type="text" placeholder='Enter Task'onChange={(e) => setTask(e.target.value)}/>
+        <input type="text" placeholder='Enter Task' onChange={(e) => setTask(e.target.value)}/>
         <button type="button" onClick={handleAdd}>Add</button>
     </div>
   )
