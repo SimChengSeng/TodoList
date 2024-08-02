@@ -1,0 +1,18 @@
+/* Style for NavLink */
+.NavLink {
+    background-color: black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    border-radius: 10px;
+    width: 250px;
+}
+  
+.Link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+}
