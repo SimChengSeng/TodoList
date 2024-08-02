@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function center(props) {
   return (
@@ -12,4 +12,4 @@ function center(props) {
   )
 }
 
-export default center
+export default center;

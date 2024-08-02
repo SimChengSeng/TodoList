@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
-import Create from './Create'
-import List from './List'
+import React, {useState} from 'react';
+import Create from './Create';
+import List from './List';
 import useTodos from '../../components/useTodos';
 import Center from '../../components/center';
-import './Home.css'
+import './Home.css';
 
 function Home() {
   
@@ -20,4 +20,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Home;

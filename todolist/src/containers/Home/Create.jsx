@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import './Home.css'
-import axios from 'axios'
+import React, { useState } from 'react';
+import './Home.css';
+import axios from 'axios';
 
 function Create({fetchTodos}) {
   const[task,setTask] = useState('');
@@ -8,7 +8,7 @@ function Create({fetchTodos}) {
   const handleAdd = () =>{
     
     if(!task.trim()){
-      console.log('Task is empty')
+      console.log('Task is empty');
       return
     }
 
@@ -18,10 +18,10 @@ function Create({fetchTodos}) {
       console.log('Task after setting to empty:', task);
       setTask('');
      //fetchTodos();
-      location.reload()
+      location.reload();
     })
     
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   }
 
   return (  
@@ -32,4 +32,4 @@ function Create({fetchTodos}) {
   )
 }
 
-export default Create
+export default Create;

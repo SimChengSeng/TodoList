@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import './Home.css'
-import axios from 'axios'
-import {BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs'
-import { BiBorderAll } from 'react-icons/bi'
+import React, { useEffect, useState } from 'react';
+import './Home.css';
+import axios from 'axios';
+import {BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs';
+import { BiBorderAll } from 'react-icons/bi';
 
 function List() {
     
-    const[todos,setTodos] = useState([])
+    const[todos,setTodos] = useState([]);
 
     const fetchTodos = () => {
         axios.get('http://localhost:3001/get')
@@ -33,7 +33,7 @@ function List() {
             console.log(result);
             fetchTodos(); 
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
 
     const todosNotDone = todos.filter(todo => !todo.done);
@@ -77,4 +77,4 @@ function List() {
   )
 }
 
-export default List
+export default List;
