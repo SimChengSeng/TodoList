@@ -4,14 +4,14 @@ import List from './List';
 import Center from '../../components/center';
 import './Home.css';
 
-function Home() {
+const Home = () => {
 
   return (
     <div>
        <Center>
           <h2>Todo List</h2>
-          <Create/>
-          <List/>
+          <Create />
+          <List />
         </Center>
     </div>
   )

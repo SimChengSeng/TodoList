@@ -44,7 +44,7 @@ function List() {
        {
           todos.length === 0
           ?
-          <div><h2 style={{border: "1px solid black", padding:"10px", margin:"auto"}}>No Record!</h2></div>
+          <div><h2 style={{border: "2px solid black", padding:"10px", margin:"auto"}}>No Record!</h2></div>
           :
           (
             <>
