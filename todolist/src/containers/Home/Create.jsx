@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './Home.css';
 import axios from 'axios';
 
-function Create({fetchTodos}) {
+function Create() {
+  
   const[task,setTask] = useState('');
   
   const handleAdd = () =>{
