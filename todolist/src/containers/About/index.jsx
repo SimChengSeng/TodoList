@@ -1,5 +1,4 @@
 import React from 'react';
-import Center from '../../components/center';
 import UseCase from './UseCase.jpeg';
 import './About.css';
 

@@ -16,9 +16,7 @@ function Create() {
     axios.post('http://localhost:3001/add',{task:task})
     .then(result => {
        
-      console.log('Task after setting to empty:', task);
       setTask('');
-     //fetchTodos();
       location.reload();
     })
     

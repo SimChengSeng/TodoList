@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Home.css';
 import axios from 'axios';
 import {BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs';
-import { BiBorderAll } from 'react-icons/bi';
 
 function List() {
     
@@ -21,7 +20,7 @@ function List() {
     const handleEdit = (id) => {
         axios.put('http://localhost:3001/update/'+id)
         .then(result => {
-            console.log(result);
+            console.log(result,"Update successful");
             fetchTodos(); 
         })
         .catch(err => console.log(err))
@@ -30,7 +29,7 @@ function List() {
     const handleDelete = (id) => {
         axios.delete('http://localhost:3001/delete/'+id)
         .then(result => {
-            console.log(result);
+            console.log(result,"Delete successful");
             fetchTodos(); 
         })
         .catch(err => console.log(err));
@@ -44,7 +43,10 @@ function List() {
        {
           todos.length === 0
           ?
-          <div><h2 style={{border: "2px solid black", padding:"10px", margin:"auto"}}>No Record!</h2></div>
+          <div>
+            <h2 style={{border: "2px solid black", padding:"10px", margin:"auto"}}>No Record!</h2>
+            <p style={{fontFamily:"system-ui",textAlign:"center",padding:"10px", margin:"auto"}}>No need to wait, Add tasks now!</p>
+          </div> 
           :
           (
             <>
