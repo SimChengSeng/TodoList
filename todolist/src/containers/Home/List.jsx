@@ -1,82 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import './Home.css';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-import {BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs';
+import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs';
+import { actionTypes } from '../../components/reducer';
+import './Home.css';
 
-function List() {
-    
-    const[todos,setTodos] = useState([]);
+const List = ({ todos, dispatch }) => {
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const result = await axios.get('http://localhost:3001/get');
+        dispatch({ type: actionTypes.SET_TODOS, payload: result.data });
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    const fetchTodos = () => {
-        axios.get('http://localhost:3001/get')
-          .then(result => setTodos(result.data))
-          .catch(err => console.log(err));
-      };
-    
-      useEffect(() => {
-        fetchTodos();
-      }, []);
+    fetchTodos();
+  }, [dispatch]);
 
-    const handleEdit = (id) => {
-        axios.put('http://localhost:3001/update/'+id)
-        .then(result => {
-            console.log(result,"Update successful");
-            fetchTodos(); 
-        })
-        .catch(err => console.log(err))
+  const handleEdit = async (id) => {
+    try {
+      const result = await axios.put(`http://localhost:3001/update/${id}`);
+      dispatch({ type: actionTypes.EDIT_TODO, payload: result.data });
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    const handleDelete = (id) => {
-        axios.delete('http://localhost:3001/delete/'+id)
-        .then(result => {
-            console.log(result,"Delete successful");
-            fetchTodos(); 
-        })
-        .catch(err => console.log(err));
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/delete/${id}`);
+      dispatch({ type: actionTypes.DELETE_TODO, payload: id });
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    const todosNotDone = todos.filter(todo => !todo.done);
-    const todosDone = todos.filter(todo => todo.done);
+  const todosNotDone = todos.filter(todo => !todo.done);
+  const todosDone = todos.filter(todo => todo.done);
 
-  return (  
+  return (
     <div className='list'>
-       {
-          todos.length === 0
-          ?
-          <div>
-            <h2 style={{border: "2px solid black", padding:"10px", margin:"auto"}}>No Record!</h2>
-            <p style={{fontFamily:"system-ui",textAlign:"center",padding:"10px", margin:"auto"}}>No need to wait, Add tasks now!</p>
-          </div> 
-          :
-          (
-            <>
-                {todosNotDone.map(todo => (
-                    <div key={todo._id} className='task'>
-                        <div className='checkbox' onClick={() => handleEdit(todo._id)}>
-                            <BsCircleFill className='icon' />
-                            <p>{todo.task}</p>
-                        </div>
-                        <div>
-                            <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
-                        </div>
-                    </div>
-                ))}
-                {todosDone.map(todo => (
-                    <div key={todo._id} className='task'>
-                        <div className='checkbox' onClick={() => handleEdit(todo._id)}>
-                            <BsFillCheckCircleFill className='icon' />
-                            <p className="line_through">{todo.task}</p>
-                        </div>
-                        <div>
-                            <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
-                        </div>
-                    </div>
-                ))}
-            </>
-        )
-        }
+      {todos.length === 0 ? (
+        <div>
+          <h2 style={{ border: "2px solid black", padding: "10px", margin: "auto" }}>No Record!</h2>
+          <p style={{ fontFamily: "system-ui", textAlign: "center", padding: "10px", margin: "auto" }}>No need to wait, Add tasks now!</p>
+        </div>
+      ) : (
+        <>
+          {todosNotDone.map(todo => (
+            <div key={todo._id} className='task'>
+              <div className='checkbox' onClick={() => handleEdit(todo._id)}>
+                <BsCircleFill className='icon' />
+                <p>{todo.task}</p>
+              </div>
+              <div>
+                <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
+              </div>
+            </div>
+          ))}
+          {todosDone.map(todo => (
+            <div key={todo._id} className='task'>
+              <div className='checkbox' onClick={() => handleEdit(todo._id)}>
+                <BsFillCheckCircleFill className='icon' />
+                <p className="line_through">{todo.task}</p>
+              </div>
+              <div>
+                <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default List;
