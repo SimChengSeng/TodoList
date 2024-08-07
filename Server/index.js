@@ -31,14 +31,9 @@ app.put('/update/:id', (req, res) => {
 
 app.put('/updateTodo/:id', (req, res) => {
     const { id } = req.params;
-    TodoModel.findById(id)
-        .then(todo => {
-            if (!todo) {
-                return res.status(404).json({ error: 'Todo not found' });
-            } 
-            todo.done = !todo.done;
-            return todo.save();
-        })
+    const {task} = req.body;
+
+    TodoModel.findByIdAndUpdate(id,{task},{new: true})
         .then(updatedTodo => res.json(updatedTodo))
         .catch(err => res.status(500).json(err));
 });

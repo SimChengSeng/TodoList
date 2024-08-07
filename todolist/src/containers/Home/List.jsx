@@ -27,10 +27,14 @@ const List = ({ todos, dispatch }) => {
     }
   };
 
-  const handleUpdate = async (id) => {
+  const handleUpdateText = async (id) => {
     try {
-      const result = await axios.put(`http://localhost:3001/updateTodo/${id}`);
-      dispatch({ type: actionTypes.EDIT_TODO, payload: result.data });
+      const todo = todos.find(todo => todo._id === id);
+      const newTask = prompt('Enter the new task:', todo.task);
+      if (newTask && newTask.trim()) {
+        const result = await axios.put(`http://localhost:3001/updateTodo/${id}`, { task: newTask });
+        dispatch({ type: actionTypes.EDIT_TODO, payload: result.data });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +68,7 @@ const List = ({ todos, dispatch }) => {
                 <p>{todo.task}</p>
               </div>
               <div>
-              <span><BsPencilSquare className='icon' onClick={() => handleUpdate(todo._id)} /></span>
+              <span><BsPencilSquare className='icon' onClick={() => handleUpdateText(todo._id)} /></span>
                 <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
               </div>
             </div>
