@@ -15,12 +15,34 @@ app.get('/get',(req,res) => {
     .catch(err => res.json(err));
 })
 
-app.put('/update/:id',(req,res) => {
-    const {id} = req.params;
-    TodoModel.findByIdAndUpdate({_id: id},{done: true})
-    .then(result => res.json(result))
-    .catch(err => res.json(err));
-})
+app.put('/update/:id', (req, res) => {
+    const { id } = req.params;
+    TodoModel.findById(id)
+        .then(todo => {
+            if (!todo) {
+                return res.status(404).json({ error: 'Todo not found' });
+            } 
+            todo.done = !todo.done;
+            return todo.save();
+        })
+        .then(updatedTodo => res.json(updatedTodo))
+        .catch(err => res.status(500).json(err));
+});
+
+app.put('/updateTodo/:id', (req, res) => {
+    const { id } = req.params;
+    TodoModel.findById(id)
+        .then(todo => {
+            if (!todo) {
+                return res.status(404).json({ error: 'Todo not found' });
+            } 
+            todo.done = !todo.done;
+            return todo.save();
+        })
+        .then(updatedTodo => res.json(updatedTodo))
+        .catch(err => res.status(500).json(err));
+});
+
 
 app.delete('/delete/:id',(req,res) => {
     const {id} = req.params;

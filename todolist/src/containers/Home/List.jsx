@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill } from 'react-icons/bs';
+import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill,BsPencilSquare } from 'react-icons/bs';
 import { actionTypes } from '../../components/reducer';
 import './Home.css';
 
@@ -27,7 +27,16 @@ const List = ({ todos, dispatch }) => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleUpdate = async (id) => {
+    try {
+      const result = await axios.put(`http://localhost:3001/updateTodo/${id}`);
+      dispatch({ type: actionTypes.EDIT_TODO, payload: result.data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (id) => { 
     try {
       await axios.delete(`http://localhost:3001/delete/${id}`);
       dispatch({ type: actionTypes.DELETE_TODO, payload: id });
@@ -55,6 +64,7 @@ const List = ({ todos, dispatch }) => {
                 <p>{todo.task}</p>
               </div>
               <div>
+              <span><BsPencilSquare className='icon' onClick={() => handleUpdate(todo._id)} /></span>
                 <span><BsFillTrashFill className='icon' onClick={() => handleDelete(todo._id)} /></span>
               </div>
             </div>
