@@ -56,10 +56,10 @@ app.post('/add',(req,res) => {
 
 // Login and SingUP
 app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
   
     try {
-      const user = await UserModel.findOne({ email, password });
+      const user = await UserModel.findOne({ username, password });
       if (user) {
         res.json("exist");
       } else {
@@ -72,14 +72,14 @@ app.post("/login", async (req, res) => {
   });
   
   app.post("/signup", async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
   
     try {
-      const existingUser = await UserModel.findOne({ email });
+      const existingUser = await UserModel.findOne({ username });
       if (existingUser) {
         res.json("exist");
       } else {
-        const newUser = new UserModel({ email, password });
+        const newUser = new UserModel({ username, password });
         await newUser.save();
         res.json("notExist");
       }

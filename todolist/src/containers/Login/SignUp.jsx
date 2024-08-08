@@ -5,18 +5,18 @@ import axios from 'axios';
 
 const SignUp = () => {
   const history = useNavigate();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   async function submit(e) {
     e.preventDefault();
 
     try {
-      const result = await axios.post('http://localhost:3001/signup', { email, password });
+      const result = await axios.post('http://localhost:3001/signup', { username, password });
       if (result.data === "exist") {
         alert("User already exists");
       } else if (result.data === "notExist") {
-        history("/home", { state: { id: email } });
+        history("/home", { state: { id: username } });
       }
     } catch (e) {
       alert("Wrong details");
@@ -29,8 +29,8 @@ const SignUp = () => {
       <Center>
         <h2>Sign Up</h2>
         <form onSubmit={submit}>
-          <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder='xxxx@gmail.com' />
-          <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder='$$$$' />
+          <input type="text" onChange={(e) => { setUsername(e.target.value) }} placeholder='username' />
+          <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder='password' />
           <input type="submit" />
         </form>
 

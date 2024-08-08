@@ -5,16 +5,16 @@ import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   async function submit(e) {
     e.preventDefault();
 
     try {
-      const result = await axios.post('http://localhost:3001/login', { email, password });
+      const result = await axios.post('http://localhost:3001/login', {username, password });
       if (result.data === "exist") {
-        navigate("/home", { state: { id: email } });
+        navigate("/home", { state: { id: username } });
       } else if (result.data === "notExist") {
         alert("User has not signed up");
       }
@@ -29,8 +29,8 @@ const Login = () => {
       <Center>
         <h2>Login</h2>
         <form onSubmit={submit}>
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder='xxxx@gmail.com' required />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder='$$$$' required />
+          <input type="text" onChange={(e) => setUsername(e.target.value)} placeholder='username' required />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder='password'required />
           <input type="submit" value="Login" />
         </form>
 
