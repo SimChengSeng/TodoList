@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./db.js');
 const cors = require('cors');
 const TodoModel = require('./models/Todo.js');
+const UserModel = require('./models/User.js');
 
 const app = express();
 app.use(cors());
@@ -38,7 +39,6 @@ app.put('/updateTodo/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-
 app.delete('/delete/:id',(req,res) => {
     const {id} = req.params;
     TodoModel.findByIdAndDelete({_id: id})
@@ -53,6 +53,43 @@ app.post('/add',(req,res) => {
     }).then(result => res.json(result))
     .catch(err => res.json(err));
 })
+
+// Login and SingUP
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      const user = await UserModel.findOne({ email, password });
+      if (user) {
+        res.json("exist");
+      } else {
+        res.json("notExist");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      res.status(500).json("error");
+    }
+  });
+  
+  app.post("/signup", async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      const existingUser = await UserModel.findOne({ email });
+      if (existingUser) {
+        res.json("exist");
+      } else {
+        const newUser = new UserModel({ email, password });
+        await newUser.save();
+        res.json("notExist");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      res.status(500).json("error");
+    }
+  });
+  
+  
 
 app.listen(3001,() => {
     console.log("Server is Running ");
