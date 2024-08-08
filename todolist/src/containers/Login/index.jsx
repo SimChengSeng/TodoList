@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Center from '../../components/center';
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
+import './login.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,11 +35,9 @@ const Login = () => {
           <input type="submit" value="Login" />
         </form>
 
+       <p style={{ textAlign: "center" }}>OR</p>
         <br />
-        <p>OR</p>
-        <br />
-
-        <Link to="/signup">Signup Page</Link>
+        <Link to="/signup" style={{ display: "block", textAlign: "center", fontSize: "1.25rem" }}>Sign Up</Link>
       </Center>
     </div>
   );

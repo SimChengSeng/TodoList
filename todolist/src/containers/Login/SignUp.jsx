@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Center from '../../components/center';
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
+import './login.css';
+import center from '../../components/center';
 
 const SignUp = () => {
   const history = useNavigate();
@@ -35,10 +37,10 @@ const SignUp = () => {
         </form>
 
         <br />
-        <p>OR</p>
+        <p style={{ textAlign: "center" }}>OR</p>
         <br />
+        <Link to="/" style={{ display: "block", textAlign: "center", fontSize: "1.25rem" }}>Login</Link>
 
-        <Link to="/">Login</Link>
       </Center>
     </div>
   )
