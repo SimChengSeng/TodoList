@@ -11,6 +11,13 @@ const Home = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+console.log(location.state.username);
+console.log("---state.username---");
+
+console.log(location.state._id);
+console.log("---state._id---");
+
+
   const logout = () => {
     localStorage.clear();
     navigate('/');  
@@ -20,12 +27,12 @@ const Home = () => {
     <div>
       <Center>
         <h2>Todo List</h2>
-        <h3>Welcome {location.state.id}</h3>
-        <Create dispatch={dispatch} />
-        <List todos={state.todos} dispatch={dispatch} />
+        <h3>Welcome, {location.state.username}</h3>
+        <Create dispatch={dispatch} owner={location.state._id} />
+        <List todos={state.todos} dispatch={dispatch} ownerId={location.state._id}/>
       </Center>
       <div>
-        <a href="#" onClick={logout} style={{ display: "block", textAlign: "center", fontSize: "1.25rem" }}>LOGOUT</a>
+        <a href="#" onClick={logout} style={{display:"flow-root",marginTop:"400px",textAlign: "center", fontSize: "1.25rem" }}>LOGOUT</a>
       </div>
     </div>
   );

@@ -3,8 +3,12 @@ import axios from 'axios';
 import { actionTypes } from '../../components/reducer';
 import './Home.css';
 
-const Create = ({ dispatch }) => {
+const Create = ({ dispatch, owner }) => {
   const [task, setTask] = useState('');
+
+  console.log("---owner---");
+  console.log(owner);
+
 
   const handleAdd = async () => {
     if (!task.trim()) {
@@ -13,7 +17,7 @@ const Create = ({ dispatch }) => {
     }
 
     try {
-      const result = await axios.post('http://localhost:3001/add', { task });
+      const result = await axios.post('http://localhost:3001/add', { task,owner});
       dispatch({ type: actionTypes.ADD_TODO, payload: result.data });
       setTask('');
       console.log(result);

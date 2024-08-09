@@ -10,12 +10,16 @@ app.use(express.json());
 
 connectDB();
 
+//get all
 app.get('/get',(req,res) => {
-    TodoModel.find()
+  const {ownerId} =  req.query;
+  
+  TodoModel.find({owner:ownerId})
     .then(result => res.json(result))
     .catch(err => res.json(err));
 })
 
+//update done status
 app.put('/update/:id', (req, res) => {
     const { id } = req.params;
     TodoModel.findById(id)
@@ -30,6 +34,7 @@ app.put('/update/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+//update todo
 app.put('/updateTodo/:id', (req, res) => {
     const { id } = req.params;
     const {task} = req.body;
@@ -39,6 +44,7 @@ app.put('/updateTodo/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+//delete todo
 app.delete('/delete/:id',(req,res) => {
     const {id} = req.params;
     TodoModel.findByIdAndDelete({_id: id})
@@ -46,22 +52,28 @@ app.delete('/delete/:id',(req,res) => {
     .catch(err => res.json(err));
 })
 
+//add todo
 app.post('/add',(req,res) => {
-    const task = req.body.task;
+    const {task,owner} = req.body;
+   
     TodoModel.create({
-        task: task
+        task: task,
+        owner: owner
+    
     }).then(result => res.json(result))
     .catch(err => res.json(err));
 })
 
 // Login and SingUP
 app.post("/login", async (req, res) => {
-    const { username, password } = req.body;
+    const {username} = req.body;
   
     try {
-      const user = await UserModel.findOne({ username, password });
+      const user = await UserModel.findOne({ username });
+      console.log("---user---");
+      console.log(user._id);
       if (user) {
-        res.json("exist");
+        res.json(user);
       } else {
         res.json("notExist");
       }

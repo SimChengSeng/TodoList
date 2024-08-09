@@ -4,11 +4,18 @@ import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill,BsPencilSquare } f
 import { actionTypes } from '../../components/reducer';
 import './Home.css';
 
-const List = ({ todos, dispatch }) => {
+const List = ({ todos, dispatch, ownerId}) => {
+  
+  console.log("---listowner---");
+  console.log(ownerId);
+
   useEffect(() => {
+   
     const fetchTodos = async () => {
-      try {
-        const result = await axios.get('http://localhost:3001/get');
+      try { 
+        const result = await axios.get('http://localhost:3001/get',{
+          params: { ownerId }  
+        });
         dispatch({ type: actionTypes.SET_TODOS, payload: result.data });
       } catch (error) {
         console.error(error);
@@ -16,7 +23,7 @@ const List = ({ todos, dispatch }) => {
     };
 
     fetchTodos();
-  }, [dispatch]);
+  }, [dispatch,ownerId]);
 
   const handleEdit = async (id) => {
     try {
