@@ -5,6 +5,7 @@
     outline: none;
     margin-bottom: 10px;
     font-size: 1.25rem;
+    text-align: center;
   }
   
   .SignUp input{
@@ -14,4 +15,10 @@
     outline: none;
     margin-bottom: 10px;
     font-size: 1.25rem;
+    text-align: center;
+  }
+
+  form{
+    display: grid;
+    place-items: center; 
   }

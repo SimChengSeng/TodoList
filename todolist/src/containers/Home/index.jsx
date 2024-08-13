@@ -32,7 +32,7 @@ console.log("---state._id---");
         <List todos={state.todos} dispatch={dispatch} ownerId={location.state._id}/>
       </Center>
       <div>
-        <a href="#" onClick={logout} style={{display:"flow-root",marginTop:"400px",textAlign: "center", fontSize: "1.25rem" }}>LOGOUT</a>
+        <a href="#" onClick={logout} style={{display:"flow-root",marginTop:"400px",textAlign: "center", fontSize: "1.25rem",color:"black" }}>LOGOUT</a>
       </div>
     </div>
   );

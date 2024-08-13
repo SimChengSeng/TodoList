@@ -6,7 +6,7 @@ import './login.css';
 import center from '../../components/center';
 
 const SignUp = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,13 +15,15 @@ const SignUp = () => {
 
     try {
       const result = await axios.post('http://localhost:3001/signup', { username, password });
+      
       if (result.data === "exist") {
         alert("User already exists");
       } else if (result.data === "notExist") {
-        history("/home", { state: { id: username } });
+        alert("Successful registration");
+        // navigate("/home", { state: { username: result.data.username, _id: result.data._id } });
       }
     } catch (e) {
-      alert("Wrong details");
+      alert("Wrong details"); 
       console.log(e);
     }
   }

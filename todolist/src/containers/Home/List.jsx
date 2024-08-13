@@ -13,9 +13,7 @@ const List = ({ todos, dispatch, ownerId}) => {
    
     const fetchTodos = async () => {
       try { 
-        const result = await axios.get('http://localhost:3001/get',{
-          params: { ownerId }  
-        });
+        const result = await axios.get('http://localhost:3001/get',{ params: { ownerId }});
         dispatch({ type: actionTypes.SET_TODOS, payload: result.data });
       } catch (error) {
         console.error(error);

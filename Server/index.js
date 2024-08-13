@@ -12,7 +12,7 @@ connectDB();
 
 //get all
 app.get('/get',(req,res) => {
-  const {ownerId} =  req.query;
+  const {ownerId} = req.query;
   
   TodoModel.find({owner:ownerId})
     .then(result => res.json(result))
@@ -66,10 +66,10 @@ app.post('/add',(req,res) => {
 
 // Login and SingUP
 app.post("/login", async (req, res) => {
-    const {username} = req.body;
+    const {username,password} = req.body;
   
     try {
-      const user = await UserModel.findOne({ username });
+      const user = await UserModel.findOne({ username, password });
       console.log("---user---");
       console.log(user._id);
       if (user) {
@@ -92,8 +92,9 @@ app.post("/login", async (req, res) => {
         res.json("exist");
       } else {
         const newUser = new UserModel({ username, password });
-        await newUser.save();
-        res.json("notExist");
+         res.json("notExist");
+         await newUser.save();
+       
       }
     } catch (error) {
       console.error("Error during signup:", error);
