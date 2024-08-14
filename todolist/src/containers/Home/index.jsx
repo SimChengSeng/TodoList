@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import Create from './Create';
 import List from './List';
+import Search from './Search';
 import Center from '../../components/center';
 import './Home.css';
 import { reducer, initialState, actionTypes } from '../../components/reducer';
@@ -29,10 +30,12 @@ console.log("---state._id---");
         <h2>Todo List</h2>
         <h3>Welcome, {location.state.username}</h3>
         <Create dispatch={dispatch} owner={location.state._id} />
+        <Search dispatch={dispatch} ownerId={location.state._id}/>
         <List todos={state.todos} dispatch={dispatch} ownerId={location.state._id}/>
       </Center>
       <div>
-        <a href="#" onClick={logout} style={{display:"flow-root",marginTop:"400px",textAlign: "center", fontSize: "1.25rem",color:"black" }}>LOGOUT</a>
+       
+        <a href="#" onClick={logout} style={{display:"flow-root",marginTop:"100px",textAlign: "center", fontSize: "1.25rem",color:"black" }}>LOGOUT</a>
       </div>
     </div>
   );

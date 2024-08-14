@@ -64,6 +64,20 @@ app.post('/add',(req,res) => {
     .catch(err => res.json(err));
 })
 
+//Search
+
+app.get('/search', (req,res) => {
+  const {ownerId} = req.query;
+  const {searchTask} = req.query;
+
+  console.log('Received searchTask:', searchTask); 
+
+  TodoModel.find({ owner: ownerId, task:searchTask })
+  .then(result => res.json(result))
+  .catch(err => res.json(err));
+
+})
+
 // Login and SingUP
 app.post("/login", async (req, res) => {
     const {username,password} = req.body;
