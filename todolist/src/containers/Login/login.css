@@ -1,0 +1,24 @@
+.Login input{
+    width: 266px; 
+    padding: 10px;
+    border-bottom: 2px solid;
+    outline: none;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+  
+  .SignUp input{
+    width: 266px; 
+    padding: 10px;
+    border-bottom: 2px solid;
+    outline: none;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  form{
+    display: grid;
+    place-items: center; 
+  }
