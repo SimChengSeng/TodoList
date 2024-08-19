@@ -72,10 +72,9 @@ app.get('/search', (req,res) => {
 
   console.log('Received searchTask:', searchTask); 
 
-  TodoModel.find({ owner: ownerId, task:searchTask })
+  TodoModel.find({ owner: ownerId, task: new RegExp(searchTask, 'i') })
   .then(result => res.json(result))
   .catch(err => res.json(err));
-
 })
 
 // Login and SingUP
