@@ -4,7 +4,7 @@ import { BsCircleFill, BsFillCheckCircleFill, BsFillTrashFill,BsPencilSquare } f
 import { actionTypes } from '../../components/reducer';
 import './Home.css';
 
-const List = ({ todos, dispatch, ownerId}) => {
+const List = React.memo(({ todos, dispatch, ownerId}) => {
   
   console.log("---listowner---");
   console.log(ownerId);
@@ -93,6 +93,6 @@ const List = ({ todos, dispatch, ownerId}) => {
       )}
     </div>
   );
-};
+});
 
 export default List;

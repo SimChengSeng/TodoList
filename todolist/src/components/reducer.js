@@ -6,7 +6,8 @@ export const initialState = {
     SET_TODOS: 'SET_TODOS',
     ADD_TODO: 'ADD_TODO',
     EDIT_TODO: 'EDIT_TODO',
-    DELETE_TODO: 'DELETE_TODO'
+    DELETE_TODO: 'DELETE_TODO',
+    SEARCH_TODO: 'SEARCH_TODO'
   };
   
   export const reducer = (state, action) => {
@@ -22,6 +23,8 @@ export const initialState = {
         return { ...state, todos: state.todos.map(todo => todo._id === action.payload._id ? action.payload : todo) };
       case actionTypes.DELETE_TODO:
         return { ...state, todos: state.todos.filter(todo => todo._id !== action.payload) };
+        case actionTypes.SEARCH_TODO:
+          return { ...state, todos: action.payload };
       default:
         return state;
     }

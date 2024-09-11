@@ -64,6 +64,19 @@ app.post('/add',(req,res) => {
     .catch(err => res.json(err));
 })
 
+//Search
+
+app.get('/search', (req,res) => {
+  const {ownerId} = req.query;
+  const {searchTask} = req.query;
+
+  console.log('Received searchTask:', searchTask); 
+
+  TodoModel.find({ owner: ownerId, task: new RegExp(searchTask, 'i') })
+  .then(result => res.json(result))
+  .catch(err => res.json(err));
+})
+
 // Login and SingUP
 app.post("/login", async (req, res) => {
     const {username,password} = req.body;
@@ -101,6 +114,21 @@ app.post("/login", async (req, res) => {
       res.status(500).json("error");
     }
   });
+
+  app.get('/users-todos', async (req, res) => {
+    try {
+      const users = await UserModel.find({});  // Fetch all users
+      const usersWithTodos = await Promise.all(users.map(async user => {
+        const todos = await TodoModel.find({ owner: user._id });  // Fetch todos for each user
+        return { ...user.toObject(), todos };  // Combine user data with their todos
+      }));
+   
+      res.json(usersWithTodos);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch users and todos' });
+    }
+  });
+  
   
   
 
