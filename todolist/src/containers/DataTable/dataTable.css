@@ -1,0 +1,24 @@
+.users-todos {
+    margin: 20px;
+  }
+  
+  .user-section {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .user-section h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .user-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-section li {
+    padding: 5px 0;
+  }
+  

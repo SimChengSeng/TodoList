@@ -3,7 +3,7 @@ import axios from 'axios';
 import { actionTypes } from '../../components/reducer';
 import './Home.css';
 
-const Search = ({ dispatch, ownerId }) => {
+const Search = React.memo(({ dispatch, ownerId }) => {
   const [searchTask, setSearchTask] = useState('');
 
   useEffect(() => {
@@ -44,6 +44,6 @@ const Search = ({ dispatch, ownerId }) => {
       </div> */}
     </>
   );
-};
+});
 
 export default Search;

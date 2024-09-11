@@ -114,6 +114,21 @@ app.post("/login", async (req, res) => {
       res.status(500).json("error");
     }
   });
+
+  app.get('/users-todos', async (req, res) => {
+    try {
+      const users = await UserModel.find({});  // Fetch all users
+      const usersWithTodos = await Promise.all(users.map(async user => {
+        const todos = await TodoModel.find({ owner: user._id });  // Fetch todos for each user
+        return { ...user.toObject(), todos };  // Combine user data with their todos
+      }));
+   
+      res.json(usersWithTodos);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch users and todos' });
+    }
+  });
+  
   
   
 
