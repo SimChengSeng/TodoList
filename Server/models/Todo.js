@@ -12,6 +12,10 @@ const TodoSchema = new mongoose.Schema({
     owner:{
         type: String,
         default: ""
+    },
+    createDate:{
+        type: Date,
+        default: Date.now
     }
 })
 

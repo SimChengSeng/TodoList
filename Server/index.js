@@ -64,6 +64,14 @@ app.post('/add',(req,res) => {
     .catch(err => res.json(err));
 })
 
+//delete user
+app.delete('/deleteUser/:id', (req, res) => {
+  const { id } = req.params;
+  UserModel.findByIdAndDelete(id)
+    .then(result => res.json(result))
+    .catch(err => res.json(err));
+});
+
 //Search
 
 app.get('/search', (req,res) => {
